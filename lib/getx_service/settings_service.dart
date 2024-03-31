@@ -10,7 +10,13 @@ class SettingsService extends GetxService {
     debugPrint('$runtimeType initialize shared preference');
     _prefs = await SharedPreferences.getInstance();
     debugPrint('$runtimeType shared preference ready!');
-    counter.value = (_prefs.getInt('counter') ?? 0);
+    if (_prefs.getInt('counter') == null)
+      {
+        counter.value =  0;
+        _prefs.setInt('counter',counter.value) ;
+      }
+
+
     return this;
   }
 
